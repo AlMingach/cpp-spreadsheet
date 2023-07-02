@@ -1,8 +1,5 @@
 #include "sheet.h"
 
-#include "cell.h"
-#include "common.h"
-
 #include <algorithm>
 #include <functional>
 #include <iostream>
@@ -10,12 +7,16 @@
 
 using namespace std::literals;
 
-std::ostream& operator<<(std::ostream& output, const CellInterface::Value& val) {
-    std::visit([&output](auto& v) {
+namespace {
+
+std::ostream& operator<<(std::ostream& output, const CellInterface::Value &val) {
+    std::visit([&output](auto &v) {
         output << v;
     }, val);
     return output;
 }
+
+} // namespace
 
 Sheet::Row& Sheet::Row::SetCellToRow(int pos, std::string text, Sheet& sheet) {
     auto result = row_.emplace(pos, std::make_unique<Cell>(sheet));

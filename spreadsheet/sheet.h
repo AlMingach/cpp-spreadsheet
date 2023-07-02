@@ -7,7 +7,7 @@
 #include <map>
 #include <memory>
 
-std::ostream& operator<<(std::ostream& output, const CellInterface::Value& val);
+//inline std::ostream& operator<<(std::ostream& output, const CellInterface::Value& val);
 
 class Sheet : public SheetInterface {
 public:

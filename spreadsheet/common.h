@@ -50,11 +50,10 @@ public:
 
     std::string_view ToString() const;
 
+
 private:
     Category category_;
 };
-
-std::ostream& operator<<(std::ostream& output, FormulaError fe);
 
 // Исключение, выбрасываемое при попытке передать в метод некорректную позицию
 class InvalidPositionException : public std::out_of_range {
@@ -98,6 +97,8 @@ public:
     // ячеек. В случае текстовой ячейки список пуст.
     virtual std::vector<Position> GetReferencedCells() const = 0;
 };
+
+std::ostream& operator<<(std::ostream& output, FormulaError fe);
 
 inline constexpr char FORMULA_SIGN = '=';
 inline constexpr char ESCAPE_SIGN = '\'';

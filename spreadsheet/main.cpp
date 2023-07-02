@@ -287,6 +287,26 @@ void TestPrint() {
     ASSERT_EQUAL(values.str(), "\t\nmeow\t35\n");
 }
 
+  void TestPrint2() {
+      auto sheet = CreateSheet();
+      sheet->SetCell("A2"_pos, "meow");
+      sheet->SetCell("B2"_pos, "=1+2");
+      sheet->SetCell("A1"_pos, "=1/0");
+
+      ASSERT_EQUAL(sheet->GetPrintableSize(), (Size{2, 2}));
+
+      std::ostringstream texts;
+      sheet->PrintTexts(texts);
+      ASSERT_EQUAL(texts.str(), "=1/0\t\nmeow\t=1+2\n");
+
+      std::ostringstream values;
+      sheet->PrintValues(values);
+      ASSERT_EQUAL(values.str(), "#DIV/0!\t\nmeow\t3\n");
+
+      sheet->ClearCell("B2"_pos);
+      ASSERT_EQUAL(sheet->GetPrintableSize(), (Size{2, 1}));
+  }
+    
 void TestCellReferences() {
     auto sheet = CreateSheet();
     sheet->SetCell("A1"_pos, "1");
@@ -365,6 +385,7 @@ int main() {
     RUN_TEST(tr, TestEmptyCellTreatedAsZero);
     RUN_TEST(tr, TestFormulaInvalidPosition);
     RUN_TEST(tr, TestPrint);
+    RUN_TEST(tr, TestPrint2);
     RUN_TEST(tr, TestCellReferences);
     RUN_TEST(tr, TestFormulaIncorrect);
     RUN_TEST(tr, TestCellCircularReferences);
