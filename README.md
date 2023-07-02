@@ -15,7 +15,7 @@
 ## Сборка
 
 > 1. Установите ANTLR согласно инструкции https://github.com/antlr/antlr4/blob/master/doc/getting-started.md.
-> 2. В пустую папку проекта (antlr4_runtime) перенести содержимое архива antlr4-cpp-runtime*.zip.
+> 2. Создайте пустую папку с именем `antlr4_runtime` в репозитории проекта и перенести содержимое архива antlr4-cpp-runtime*.zip.
 > 3. Создайте папку для сборки программы.
 > 4. Откройте консоль в данной папке и введите в консоли : `cmake <путь к файлу CMakeLists.txt> -DANTLR_EXECUTABLE=<путь к antlr-4.13.0-complete.jar>`.
 > 5. Введите команду : `cmake --build .` .
